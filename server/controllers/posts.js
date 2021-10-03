@@ -1,3 +1,5 @@
+
+const ObjectId = require('mongoose').Types.ObjectId;
 const PostMessage = require('./../models/postMessage')
 
 exports.getPost = async (req, res)=>{
@@ -21,3 +23,13 @@ exports.createPost = async (req, res)=>{
     }
 }
 
+exports.updatePost = async (req, res) => {
+    const {id:_id} = req.params
+    const post = req.body
+
+    if(!ObjectId.isValid(_id)) return res.status(404).send('Немає такого ід поста')
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, {new:true})
+
+    res.json(updatedPost)
+}
