@@ -32,6 +32,7 @@ function App() {
           <Grid
             container
             justify="space-between"
+            className={classes.mainContainer}
             alignItems="stretch"
             spacing="3"
           >
